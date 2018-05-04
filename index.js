@@ -53,6 +53,10 @@ app.post('/ipfs', (req, res) => {
             return res.status(400).json({ error: 'File form data parameter is missing' })
         }
 
+        if (!req.body.rateLimit) {
+            return res.status(400).json({ error: 'RateLimit parameter is missing' })
+        }
+
         ipfs.files.add(req.file.buffer)
             .then(result => {
                 const ipfsResponse = result[0]
