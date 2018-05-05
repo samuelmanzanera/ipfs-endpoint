@@ -26,7 +26,7 @@ To test the project, you need to launch a local IPFS node.
 Then type on terminal
 
 ```bash
-    $ npm test
+$ npm test
 ```
 
 ## Licence
