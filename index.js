@@ -74,17 +74,19 @@ app.post('/ipfs', (req, res) => {
 
 function checkRateLimit(hash) {
     return new Promise((resolve, reject) => {
-        if (!fs.exists(hashCounterFilename)) {
-            return reject('Not rate limit was given for this file')
-        }
-        fs.readFile(hashCounterFilename, { encoding: 'utf8'}, (err, data) => {
-            if (err) {
-                return reject(err)
+        fs.exists(hashCounterFilename, exists => {
+            if (!exists) {
+                return reject('Not rate limit was given for this file')
             }
-            const hashCounterData = JSON.parse(data)
-            if (hashCounterData[hash] === undefined) return resolve(true)
-            else if (hashCounterData[hash] === 0) return resolve(false)
-            else resolve(true)
+            fs.readFile(hashCounterFilename, { encoding: 'utf8'}, (err, data) => {
+                if (err) {
+                    return reject(err)
+                }
+                const hashCounterData = JSON.parse(data)
+                if (hashCounterData[hash] === undefined) return resolve(true)
+                else if (hashCounterData[hash] === 0) return resolve(false)
+                else resolve(true)
+            })
         })
     })
 }
