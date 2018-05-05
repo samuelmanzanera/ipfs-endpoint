@@ -54,7 +54,7 @@ app.post('/ipfs', (req, res) => {
         }
 
         if (!req.body.rateLimit) {
-            return res.status(400).json({ error: 'RateLimit parameter is missing' })
+            return res.status(400).json({ error: 'rateLimit parameter is missing' })
         }
 
         ipfs.files.add(req.file.buffer)
@@ -147,3 +147,6 @@ function writeCounterOnFile(hashCounterData) {
 app.listen(process.env.PORT, () => {
     console.log('API listening on ' + process.env.PORT)
 })
+
+
+module.exports = app
