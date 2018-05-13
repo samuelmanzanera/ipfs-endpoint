@@ -10,8 +10,8 @@ services:
       - 8082:8082
       - 8081:8081
       - 5001:5001
-    links: 
+    links:
       - go-ipfs
-  
+
   go-ipfs:
     image: jbenet/go-ipfs

@@ -15,7 +15,7 @@ describe('Endpoints testing', () => {
     //         .end(done);
     // });
 
-    it('publish file', done => {
+    it.only('publish file', done => {
         request.post('/bykey/ipfs/key1')
             .field('file', fs.createReadStream(path.join(__dirname, '/myfile.txt')))
             .field('rateLimit', 1)
