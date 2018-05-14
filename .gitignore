@@ -1,2 +1,3 @@
 node_modules
-hashCounter.json
+lib/hashCounter.json
+lib/keyCodes.json

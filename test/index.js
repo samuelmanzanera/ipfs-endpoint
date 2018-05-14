@@ -5,6 +5,7 @@ const supertest = require('supertest')
 const app = require('../index')
 const request = supertest(app)
 
+
 describe('Endpoints testing', () => {
 
     it ('publish file', done => {
@@ -80,6 +81,27 @@ describe('Endpoints testing', () => {
                             })
                             .end(done)
                     })
+            })
+    })
+
+    it ('add file with keycode hash', done => {
+        request.post('/ipfs')
+            .field('file', fs.createReadStream(__dirname + '/testFile.txt'))
+            .field('rateLimit', 1)
+            .field('keyCodeHash', 'testFile')
+            .expect(200)
+            .end((err, res) => {
+                if (err){
+                    return done(err)
+                }
+
+                request.get('/ipfs/keyCode/' + res.body.keyCodeHash)
+                    .expect(200)
+                    .expect(res => {
+                        assert.equal(res.headers['content-type'], 'application/octet-stream')
+                        assert.equal(Buffer.isBuffer(res.body), true)
+                    })
+                    .end(done)
             })
     })
 
