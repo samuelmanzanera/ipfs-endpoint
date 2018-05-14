@@ -14,10 +14,12 @@ $ npm start
 The API provide two endpoints
 
 - GET /ipfs/:hash => get the document stored on IPFS
+- GET /ipfs/keycode/:hash => get the document by an user friendly keycode
 - POST /ipfs => add a new document on IPFS
     - Required parameters: 
         - file as form-data -> File to store on IPFS
         - rateLimit -> Rate limit to reach to have an access to the file
+        - keyCodeHash -> Specify an user-friendly hash to have access it lately
 
 
 ## Test
